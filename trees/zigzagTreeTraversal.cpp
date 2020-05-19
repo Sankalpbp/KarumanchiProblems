@@ -2,38 +2,38 @@ void zigZagTraversal(Node* root)
 {
 	// Code here
 	int left2Right = 1;
-	stack<Node *> st1, st2;
+	stack<Node *> currentLevel, nextLevel;
 	
-	st1.push(root);
+	currentLevel.push(root);
 	Node * current;
-	while(st1.empty() == false) {
+	while(currentLevel.empty() == false) {
 	    
-	    current = st1.top();
-	    st1.pop();
+	    current = currentLevel.top();
+	    currentLevel.pop();
 	    
 	    if(current != NULL) {
 	        cout << current -> data << " ";
 	        if(left2Right) {
 	            if(current -> left) {
-	                st2.push(current -> left);
+	                nextLevel.push(current -> left);
 	            }
 	            
 	            if(current -> right) {
-	                st2.push(current -> right);
+	                nextLevel.push(current -> right);
 	            }
 	        } else {
 	            if(current -> right) {
-	                st2.push(current -> right);
+	                nextLevel.push(current -> right);
 	            }
 	            
 	            if(current -> left) {
-	                st2.push(current -> left);
+	                nextLevel.push(current -> left);
 	            }
 	        }
 	    }
 	    
-	    if(st1.empty() == true) {
-	        swap(st1, st2);
+	    if(currentLevel.empty() == true) {
+	        swap(currentLevel, nextLevel);
 	        left2Right = 1 - left2Right;
 	    }
 	}
